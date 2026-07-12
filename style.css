@@ -1,0 +1,317 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+}
+
+/* Map block */
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Plane icon block */
+.plane-icon {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: transform 500ms linear;
+}
+
+.plane-icon__symbol {
+    font-size: 24px;
+    line-height: 32px;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    cursor: pointer;
+    color: #ffd700;
+    -webkit-text-stroke: 1px #000000;
+}
+
+.plane-icon__symbol--selected {
+    color: #ff6b6b;
+}
+
+.plane-icon__flight {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Info panel block */
+.info-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 340px;
+    background-color: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-family: system-ui, sans-serif;
+    z-index: 1000;
+    touch-action: none;
+    user-select: none;
+    color: #ffffff;
+}
+
+.info-panel__header {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: move;
+}
+
+.info-panel__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.info-panel__content {
+    padding: 12px 16px;
+    margin: 0;
+}
+
+.info-panel__text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.info-panel__text:last-child {
+    margin-bottom: 0;
+}
+
+.info-panel__flight {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.info-panel__icao {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 12px 0;
+    font-family: monospace;
+}
+
+.info-panel__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.info-panel__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.info-panel__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.info-panel__value {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.info-panel__coords {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Active flights panel */
+.flights-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: min(760px, calc(100vw - 380px));
+    min-width: 620px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100dvh - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-family: system-ui, sans-serif;
+    color: #ffffff;
+    z-index: 1000;
+    touch-action: none;
+    user-select: none;
+}
+
+.flights-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: move;
+}
+
+.flights-panel__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.flights-panel__count {
+    min-width: 24px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.flights-panel__body {
+    overflow: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+}
+
+.flights-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12px;
+}
+
+.flights-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 8px 10px;
+    background: rgba(20, 20, 30, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.flights-table th:nth-child(1),
+.flights-table td:nth-child(1) {
+    width: 24%;
+    text-align: left;
+}
+
+.flights-table th:nth-child(2),
+.flights-table td:nth-child(2),
+.flights-table th:nth-child(3),
+.flights-table td:nth-child(3),
+.flights-table th:nth-child(4),
+.flights-table td:nth-child(4) {
+    width: 17%;
+}
+
+.flights-table th:nth-child(5),
+.flights-table td:nth-child(5) {
+    width: 25%;
+}
+
+.flights-table tbody tr {
+    cursor: pointer;
+    transition: background-color 120ms ease;
+}
+
+.flights-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+}
+
+.flights-table tbody tr.flights-table__row--selected {
+    background-color: rgba(255, 107, 107, 0.22);
+}
+
+.flights-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.85);
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.flights-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.flights-table__flight {
+    display: block;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.flights-table__icao {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: monospace;
+    font-size: 10px;
+}
+
+.flights-table__coords {
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.flights-table__coords span {
+    display: block;
+}
+
+.flights-table__empty {
+    padding: 18px !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    text-align: center !important;
+}
+
+@media (max-width: 1100px) {
+    .flights-panel {
+        width: calc(100vw - 40px);
+        min-width: 0;
+        max-height: 45dvh;
+    }
+}

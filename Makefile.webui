@@ -1,0 +1,14 @@
+CFLAGS ?= -O2 -Wall -Wextra $(shell pkg-config --cflags librtlsdr)
+LDLIBS += $(shell pkg-config --libs librtlsdr) -lpthread -lm
+CC ?= gcc
+TARGET = dump1090-webui
+
+all: $(TARGET)
+
+$(TARGET): dump1090_webui.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
+
+clean:
+	rm -f $(TARGET)
+
+.PHONY: all clean
